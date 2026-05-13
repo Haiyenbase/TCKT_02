@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPT — Profitability 2024 · 2025 · Q1/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --w:#fff;--g0:#f5f4f1;--g1:#e9e7e2;--g2:#ccc9c1;--g3:#8c8980;--g4:#4b4844;
+  --ink:#16130f;--acc:#1e40af;--up:#166534;--dn:#9f1239;
+  --up-bg:#f0fdf4;--dn-bg:#fff1f2;--neu-bg:#f5f4f1;
+}
+body{font-family:'Bricolage Grotesque',sans-serif;background:var(--w);color:var(--ink);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.page{max-width:860px;margin:0 auto;padding:2.25rem 1.75rem 3.5rem}
+
+.hd{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:2rem;padding-bottom:1.1rem;border-bottom:1.5px solid var(--ink)}
+.eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:.45rem}
+.hd h1{font-size:1.7rem;font-weight:700;line-height:1.05;letter-spacing:-.025em}
+.hd h1 em{font-family:'Lora',serif;font-style:italic;font-weight:400;color:var(--acc)}
+.hd-right{display:flex;gap:5px;align-items:center;padding-top:4px;flex-shrink:0}
+.chip{font-size:9px;letter-spacing:.07em;padding:3px 9px;border-radius:3px;font-weight:500}
+.chip-a{background:var(--g0);color:var(--g3);border:1px solid var(--g1)}
+.chip-b{background:var(--g0);color:var(--g4);border:1px solid var(--g2)}
+.chip-c{background:var(--ink);color:var(--w)}
+
+.sec{margin-bottom:1.6rem}
+.sec-label{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:.85rem;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:.5px;background:var(--g1)}
+
+.tag{display:inline-flex;align-items:center;font-size:9px;font-weight:500;padding:2px 6px;border-radius:3px;white-space:nowrap;letter-spacing:.02em}
+.tag-up{background:var(--up-bg);color:var(--up)}
+.tag-dn{background:var(--dn-bg);color:var(--dn)}
+.tag-flat{background:var(--neu-bg);color:var(--g3);border:1px solid var(--g1)}
+
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:1.5rem}
+.kpi{padding:.65rem .8rem;border:.5px solid var(--g1);border-radius:6px}
+.kpi-lbl{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g3);margin-bottom:3px}
+.kpi-val{font-size:1.1rem;font-weight:700;line-height:1;margin-bottom:3px}
+.kpi-foot{font-size:10px;color:var(--g3)}
+
+.dtbl{width:100%;border-collapse:collapse}
+.dtbl thead tr{border-bottom:1px solid var(--ink)}
+.dtbl th{font-size:8px;text-transform:uppercase;letter-spacing:.14em;color:var(--g3);padding:4px 7px;font-weight:500}
+.dtbl th.r{text-align:right}
+.dtbl tbody tr{border-bottom:.5px solid var(--g1)}
+.dtbl tbody tr:hover td{background:var(--g0)}
+.dtbl tbody tr:last-child{border-bottom:none}
+.dtbl td{padding:10px 7px;vertical-align:top}
+.dtbl td.r{text-align:right}
+.mn{font-size:12.5px;font-weight:600}
+.mf{font-size:9.5px;color:var(--g3);margin-top:2px}
+.vb{font-size:13px;font-weight:600}
+.vn{font-size:9px;color:var(--g3);margin-top:1px}
+.mt{font-size:11.5px;color:var(--g4);line-height:1.55;max-width:190px}
+.mt b{color:var(--ink);font-weight:500}
+
+.imp{min-width:195px;max-width:220px}
+.imp-chain{display:flex;flex-direction:column;gap:4px}
+.imp-step{display:flex;align-items:flex-start;gap:6px;font-size:11px;line-height:1.45;color:var(--g4);padding-bottom:4px;border-bottom:.5px dashed var(--g1)}
+.imp-step:last-child{border-bottom:none;padding-bottom:0}
+.imp-icon{flex-shrink:0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:1px}
+.ic-price{background:#eff6ff;color:#1e40af}
+.ic-cost{background:#fef9c3;color:#854d0e}
+.ic-invest{background:#f0fdf4;color:#166534}
+.ic-owner{background:#fdf4ff;color:#7e22ce}
+.ic-mkt{background:#fff7ed;color:#9a3412}
+.imp-text b{color:var(--ink);font-weight:500}
+
+.chart-wrap{position:relative;width:100%;height:215px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:9px;color:var(--g3);margin-bottom:7px;letter-spacing:.04em}
+.l-item{display:flex;align-items:center;gap:5px}
+.l-dot{width:8px;height:8px;border-radius:2px}
+.note{background:var(--g0);border-left:2.5px solid var(--acc);border-radius:0 4px 4px 0;padding:.6rem .85rem;font-size:11px;color:var(--g4);line-height:1.6}
+.note b{color:var(--acc);font-weight:500}
+
+.pb-rule{border:none;border-top:1.5px solid var(--ink);margin:3rem 0 2.25rem}
+
+.p2-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem}
+.verdict{border:.5px solid var(--g1);border-radius:7px;padding:.75rem .9rem;position:relative;overflow:hidden}
+.verdict::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px}
+.v-pos::before{background:var(--up)}
+.v-warn::before{background:#b45309}
+.v-lbl{font-size:8px;text-transform:uppercase;letter-spacing:.14em;color:var(--g3);margin-top:2px;margin-bottom:4px}
+.v-title{font-size:12px;font-weight:600;margin-bottom:4px}
+.v-body{font-size:11px;color:var(--g4);line-height:1.55}
+
+.ptbl{width:100%;border-collapse:collapse}
+.ptbl thead tr{border-bottom:1px solid var(--ink)}
+.ptbl th{font-size:8px;text-transform:uppercase;letter-spacing:.13em;color:var(--g3);padding:4px 7px;font-weight:500;white-space:nowrap}
+.ptbl th.r{text-align:right}
+.ptbl tbody tr{border-bottom:.5px solid var(--g1)}
+.ptbl tbody tr.fr td{background:#eff6ff}
+.ptbl tbody tr:hover td{background:var(--g0)}
+.ptbl tbody tr.fr:hover td{background:#dbeafe}
+.ptbl tbody tr:last-child{border-bottom:none}
+.ptbl td{padding:8px 7px;font-size:12px;vertical-align:middle}
+.ptbl td.r{text-align:right;font-weight:600;font-size:12px}
+.cn{font-weight:600;font-size:12.5px}
+.cl{font-size:9.5px;color:var(--g3);margin-top:1px}
+.fb{display:inline-block;font-size:8px;background:var(--acc);color:#fff;padding:1px 5px;border-radius:2px;margin-left:5px;vertical-align:middle;letter-spacing:.03em}
+
+.ib{display:flex;align-items:center;gap:5px;justify-content:flex-end}
+.ibt{width:60px;height:4px;background:var(--g1);border-radius:2px;overflow:hidden;flex-shrink:0}
+.ibf{height:100%;border-radius:2px}
+
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1rem}
+.dual-label{font-size:8.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--g3);margin-bottom:6px}
+.dual-canvas{position:relative;width:100%;height:185px}
+
+.concl{font-size:12.5px;color:var(--g4);line-height:1.8}
+.concl b{color:var(--ink);font-weight:500}
+
+.footer{margin-top:2rem;padding-top:.85rem;border-top:.5px solid var(--g1);font-size:9px;color:var(--g3);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;letter-spacing:.04em}
+
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.calc-card{border:.5px solid var(--g1);border-radius:8px;padding:.9rem 1rem;position:relative}
+.calc-num{font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--g2);margin-bottom:.35rem;font-family:'Lora',serif;font-style:italic}
+.calc-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.calc-formula{font-size:10.5px;color:var(--g3);border-left:2px solid var(--g1);padding-left:.55rem;margin-bottom:.7rem;line-height:1.5}
+.calc-rows{display:flex;flex-direction:column;gap:3px;margin-bottom:.65rem}
+.calc-row{display:grid;grid-template-columns:72px 1fr auto;gap:6px;align-items:baseline;font-size:12px}
+.calc-row-sub{opacity:.7}
+.calc-year{font-size:10px;color:var(--g3);font-weight:500;white-space:nowrap}
+.calc-expr{color:var(--g4);font-size:11.5px}
+.calc-result{font-weight:700;font-size:13px;color:var(--ink);text-align:right;white-space:nowrap}
+.calc-verdict{font-size:11px;padding:.35rem .6rem;border-radius:4px;font-weight:500}
+.calc-verdict.up{background:var(--up-bg);color:var(--up)}
+.calc-verdict.dn{background:var(--dn-bg);color:var(--dn)}
+@media(max-width:640px){
+  .kpi-row,.p2-grid,.dual,.calc-grid{grid-template-columns:repeat(2,1fr)}
+  .calc-grid{grid-template-columns:1fr}
+  .hd{flex-direction:column}
+  .mt{display:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="hd">
+  <div>
+    <div class="eyebrow">Phân tích tài chính · Nhóm chỉ số lợi nhuận</div>
+    <h1>FPT <em>Profitability</em><br>2024 · 2025 · Q1/2026</h1>
+  </div>
+  <div class="hd-right">
+    <div class="chip chip-a">2024</div>
+    <div class="chip chip-b">2025</div>
+    <div class="chip chip-c">Q1/2026</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">tóm tắt</div>
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-lbl">Doanh thu Q1/26</div>
+      <div class="kpi-val">12.480<span style="font-size:.6rem;font-weight:300;color:var(--g3)"> tỷ</span></div>
+      <div class="kpi-foot"><span class="tag tag-up">▲ 8,7%</span> so Q1/25</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">LNST Q1/26</div>
+      <div class="kpi-val">2.477<span style="font-size:.6rem;font-weight:300;color:var(--g3)"> tỷ</span></div>
+      <div class="kpi-foot"><span class="tag tag-up">▲ 13,8%</span> so Q1/25</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">EPS Q1/26</div>
+      <div class="kpi-val">1.460<span style="font-size:.6rem;font-weight:300;color:var(--g3)"> đ</span></div>
+      <div class="kpi-foot"><span class="tag tag-up">▲ 13,7%</span> so Q1/25</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">ROE Q1/26</div>
+      <div class="kpi-val">25,5<span style="font-size:.6rem;font-weight:300;color:var(--g3)">%</span></div>
+      <div class="kpi-foot"><span class="tag tag-flat">≈ 2025</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">biểu đồ so sánh</div>
+  <div class="legend">
+    <div class="l-item"><div class="l-dot" style="background:#c8c5be"></div>2024</div>
+    <div class="l-item"><div class="l-dot" style="background:#1e40af"></div>2025</div>
+    <div class="l-item"><div class="l-dot" style="background:#0f766e"></div>Q1/2026 (ann.)</div>
+  </div>
+  <div class="chart-wrap">
+    <canvas id="mc" role="img" aria-label="So sánh 4 chỉ số lợi nhuận FPT 2024-2025-Q1/2026">Biên gộp 37,7/36,9/34,0; Biên ròng 15,0/16,0/19,9; ROA 13,1/12,7/14,4; ROE 26,4/25,7/25,5</canvas>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">bảng chi tiết</div>
+  <div style="overflow-x:auto">
+    <table class="dtbl">
+      <thead><tr>
+        <th>Chỉ số</th>
+        <th class="r">2024</th><th class="r">2025</th><th class="r">Q1/2026</th>
+        <th class="r">Xu hướng</th><th>Ý nghĩa</th><th>Tác động đến công ty</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="mn">Biên lợi nhuận gộp</div><div class="mf">LN gộp ÷ DT thuần</div></td>
+          <td class="r"><div class="vb">37,7%</div></td>
+          <td class="r"><div class="vb">36,9%</div><div class="vn"><span class="tag tag-dn">▾ 0,8pp</span></div></td>
+          <td class="r"><div class="vb">34,0%</div><div class="vn"><span class="tag tag-dn">▾ 2,9pp</span></div></td>
+          <td class="r"><span class="tag tag-dn">▾ Giảm dần</span></td>
+          <td><div class="mt">100đ doanh thu còn lại <b>34đ</b> sau chi phí trực tiếp. Giảm chủ yếu do tách FTEL khỏi hợp nhất từ 2026.</div></td>
+          <td class="imp"><div class="imp-chain">
+            <div class="imp-step"><div class="imp-icon ic-price">💰</div><div class="imp-text">Buộc tăng giá dịch vụ hoặc tối ưu nhân sự để bảo vệ lợi nhuận</div></div>
+            <div class="imp-step"><div class="imp-icon ic-cost">⚠️</div><div class="imp-text">Nếu giảm dưới 30% → thu hẹp ngân sách R&D và tuyển dụng kỹ sư cấp cao</div></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td><div class="mn">Biên lợi nhuận ròng</div><div class="mf">LNST CTM ÷ DT thuần</div></td>
+          <td class="r"><div class="vb">15,0%</div></td>
+          <td class="r"><div class="vb">16,0%</div><div class="vn"><span class="tag tag-up">▲ 1,0pp</span></div></td>
+          <td class="r"><div class="vb">19,9%</div><div class="vn"><span class="tag tag-up">▲ 3,9pp</span></div></td>
+          <td class="r"><span class="tag tag-up">▲ Tăng mạnh</span></td>
+          <td><div class="mt">Cổ đông nhận <b>19,9đ</b> / 100đ doanh thu. Cải thiện 3 năm liên tiếp — lợi nhuận liên kết đóng góp hiệu quả.</div></td>
+          <td class="imp"><div class="imp-chain">
+            <div class="imp-step"><div class="imp-icon ic-invest">📈</div><div class="imp-text">Dư địa mở rộng AI, cloud, châu Âu mà không cần vay thêm nợ</div></div>
+            <div class="imp-step"><div class="imp-icon ic-owner">🏦</div><div class="imp-text">Nền tảng duy trì hoặc tăng cổ tức tiền mặt cho cổ đông</div></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td><div class="mn">ROA</div><div class="mf">LNST×4 ÷ Tổng tài sản</div></td>
+          <td class="r"><div class="vb">13,1%</div></td>
+          <td class="r"><div class="vb">12,7%</div><div class="vn"><span class="tag tag-dn">▾ 0,4pp</span></div></td>
+          <td class="r"><div class="vb">14,4%</div><div class="vn"><span class="tag tag-up">▲ 1,7pp</span></div></td>
+          <td class="r"><span class="tag tag-up">▲ Phục hồi</span></td>
+          <td><div class="mt">100đ tài sản sinh <b>14,4đ/năm</b>. Bảng cân đối gọn hơn sau khi FTEL tách ra (~20 nghìn tỷ giảm).</div></td>
+          <td class="imp"><div class="imp-chain">
+            <div class="imp-step"><div class="imp-icon ic-invest">🏗️</div><div class="imp-text">Đầu tư data center, campus đang bắt đầu sinh lời — chu kỳ đầu tư đúng hướng</div></div>
+            <div class="imp-step"><div class="imp-icon ic-cost">📊</div><div class="imp-text">Mua tài sản lớn tiếp theo cần kỳ hoàn vốn rõ ràng để tránh pha loãng ROA</div></div>
+          </div></td>
+        </tr>
+        <tr>
+          <td><div class="mn">ROE</div><div class="mf">LNST CTM×4 ÷ Vốn CSH</div></td>
+          <td class="r"><div class="vb">26,4%</div></td>
+          <td class="r"><div class="vb">25,7%</div><div class="vn"><span class="tag tag-dn">▾ 0,7pp</span></div></td>
+          <td class="r"><div class="vb">25,5%</div><div class="vn"><span class="tag tag-flat">≈ ổn định</span></div></td>
+          <td class="r"><span class="tag tag-flat">→ Ổn định cao</span></td>
+          <td><div class="mt">100đ vốn cổ đông sinh <b>25,5đ/năm</b>. Duy trì >25% liên tiếp — xuất sắc ngành CNTT (chuẩn tốt: >20%).</div></td>
+          <td class="imp"><div class="imp-chain">
+            <div class="imp-step"><div class="imp-icon ic-owner">💎</div><div class="imp-text">ROE >25% → hấp dẫn quỹ ngoại, phát hành vốn mới với chi phí thấp hơn</div></div>
+            <div class="imp-step"><div class="imp-icon ic-mkt">🎯</div><div class="imp-text">Nền tảng giữ P/B cao — ROE giảm dưới 20% sẽ kéo định giá thị trường xuống</div></div>
+          </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note" style="margin-top:.7rem">
+    <b>Lưu ý:</b> Từ 01/01/2026 FTEL chuyển sang equity method — doanh thu hợp nhất giảm ~22% so với Q1/2025 gốc nhưng không phản ánh suy giảm kinh doanh. ROA/ROE Q1/2026 được annualize (×4).
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">chi tiết tính toán — 2024 · 2025 · Q1/2026</div>
+  <div class="calc-grid">
+
+    <div class="calc-card">
+      <div class="calc-num">01</div>
+      <div class="calc-title">Tỷ suất lợi nhuận gộp</div>
+      <div class="calc-formula">Lợi nhuận gộp ÷ Doanh thu thuần × 100%</div>
+      <div class="calc-rows">
+        <div class="calc-row">
+          <span class="calc-year">2024</span>
+          <span class="calc-expr">23.698 ÷ 62.849</span>
+          <span class="calc-result">= 37,71%</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-year">2025</span>
+          <span class="calc-expr">25.889 ÷ 70.113</span>
+          <span class="calc-result">= 36,92%</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-year">Q1/2026</span>
+          <span class="calc-expr">4.245 ÷ 12.480</span>
+          <span class="calc-result">= 34,01%</span>
+        </div>
+      </div>
+      <div class="calc-verdict dn">↓ Giảm liên tiếp — chi phí giá vốn tăng, ảnh hưởng tách FTEL</div>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-num">02</div>
+      <div class="calc-title">Tỷ suất lợi nhuận sau thuế</div>
+      <div class="calc-formula">Lợi nhuận sau thuế ÷ Doanh thu thuần × 100%</div>
+      <div class="calc-rows">
+        <div class="calc-row">
+          <span class="calc-year">2024</span>
+          <span class="calc-expr">9.427 ÷ 62.849</span>
+          <span class="calc-result">= 15,00%</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-year">2025</span>
+          <span class="calc-expr">11.232 ÷ 70.113</span>
+          <span class="calc-result">= 16,02%</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-year">Q1/2026</span>
+          <span class="calc-expr">2.487 ÷ 12.480</span>
+          <span class="calc-result">= 19,93%</span>
+        </div>
+      </div>
+      <div class="calc-verdict up">↑ Tăng liên tiếp — kiểm soát chi phí và lợi nhuận liên kết cải thiện</div>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-num">03</div>
+      <div class="calc-title">ROA — Sinh lời trên tài sản</div>
+      <div class="calc-formula">Lợi nhuận sau thuế ÷ Tổng tài sản bình quân × 100%</div>
+      <div class="calc-rows">
+        <div class="calc-row">
+          <span class="calc-year">2024</span>
+          <span class="calc-expr">ước tính</span>
+          <span class="calc-result">≈ 13,09%</span>
+        </div>
+        <div class="calc-row calc-row-sub">
+          <span class="calc-year" style="color:var(--g3)">TS bq 2025</span>
+          <span class="calc-expr" style="color:var(--g3)">(88.142 + 72.000) ÷ 2</span>
+          <span class="calc-result" style="color:var(--g3)">= 80.071</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-year">2025</span>
+          <span class="calc-expr">11.232 ÷ 80.071</span>
+          <span class="calc-result">= 14,03%</span>
+        </div>
+        <div class="calc-row calc-row-sub">
+          <span class="calc-year" style="color:var(--g3)">TS bq Q1</span>
+          <span class="calc-expr" style="color:var(--g3)">68.586 (cuối kỳ, không bq với 2025 do tách FTEL)</span>
+          <span class="calc-result" style="color:var(--g3)">= 68.586</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-year">Q1/2026</span>
+          <span class="calc-expr">2.477×4 ÷ 68.586</span>
+          <span class="calc-result">= 14,44%</span>
+        </div>
+      </div>
+      <div class="calc-verdict up">↑ Xu hướng tốt — tài sản sinh lời hiệu quả hơn qua các năm</div>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-num">04</div>
+      <div class="calc-title">ROE — Sinh lời trên vốn CSH</div>
+      <div class="calc-formula">Lợi nhuận sau thuế ÷ Vốn CSH bình quân × 100%</div>
+      <div class="calc-rows">
+        <div class="calc-row">
+          <span class="calc-year">2024</span>
+          <span class="calc-expr">ước tính</span>
+          <span class="calc-result">≈ 26,41%</span>
+        </div>
+        <div class="calc-row calc-row-sub">
+          <span class="calc-year" style="color:var(--g3)">VCSH bq 2025</span>
+          <span class="calc-expr" style="color:var(--g3)">(43.748 + 35.728) ÷ 2</span>
+          <span class="calc-result" style="color:var(--g3)">= 39.738</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-year">2025</span>
+          <span class="calc-expr">11.232 ÷ 39.738</span>
+          <span class="calc-result">= 28,26%</span>
+        </div>
+        <div class="calc-row calc-row-sub">
+          <span class="calc-year" style="color:var(--g3)">VCSH bq Q1</span>
+          <span class="calc-expr" style="color:var(--g3)">38.952 (cuối kỳ, không bq với 2025 do tách FTEL)</span>
+          <span class="calc-result" style="color:var(--g3)">= 38.952</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-year">Q1/2026</span>
+          <span class="calc-expr">2.487×4 ÷ 38.952</span>
+          <span class="calc-result">= 25,54%</span>
+        </div>
+      </div>
+      <div class="calc-verdict up">↑ Duy trì cao — sinh lời vốn chủ sở hữu ổn định</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <span>Nguồn: BCTC hợp nhất FPT · 2024 · 2025 · Q1/2026 (24/04/2026)</span>
+  <span>Vốn CSH CTM 31/03/2026: 38.952 tỷ · Tổng tài sản: 68.586 tỷ</span>
+</div>
+
+<!-- PAGE 2 -->
+<hr class="pb-rule">
+
+<div class="hd" style="margin-bottom:1.6rem">
+  <div>
+    <div class="eyebrow">Trang 2 · Kết luận & So sánh thị trường</div>
+    <h1>FPT <em>vs.</em> Peers</h1>
+  </div>
+  <div class="hd-right"><div class="chip chip-c">Kết luận</div></div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">nhận định</div>
+  <div class="p2-grid">
+    <div class="verdict v-pos">
+      <div class="v-lbl">Điểm mạnh</div>
+      <div class="v-title">Biên ròng tăng liên tục</div>
+      <div class="v-body">15% → 16% → <b>19,9%</b> trong 3 năm, dù biên gộp giảm — cơ cấu chi phí cải thiện thực chất.</div>
+    </div>
+    <div class="verdict v-pos">
+      <div class="v-lbl">Điểm mạnh</div>
+      <div class="v-title">ROE bền vững &gt;25%</div>
+      <div class="v-body">Duy trì 3 năm liên tiếp mà không dùng đòn bẩy quá mức — hiếm gặp ở IT services châu Á.</div>
+    </div>
+    <div class="verdict v-warn">
+      <div class="v-lbl">Theo dõi</div>
+      <div class="v-title">Biên gộp giảm dần</div>
+      <div class="v-body">Một phần do kế toán (tách FTEL), phần còn lại từ áp lực chi phí nhân sự tại Nhật, Mỹ, EU.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">so sánh ngang hàng — cùng năm 2025</div>
+  <div style="overflow-x:auto">
+    <table class="ptbl">
+      <thead><tr>
+        <th>Công ty</th>
+        <th class="r">Năm TC</th>
+        <th class="r">Biên gộp</th>
+        <th class="r">Biên ròng</th>
+        <th class="r">ROE</th>
+        <th class="r">ROA</th>
+      </tr></thead>
+      <tbody>
+        <tr class="fr">
+          <td><div class="cn">FPT Corp <span class="fb">VN</span></div><div class="cl">Việt Nam · HOSE</div></td>
+          <td class="r" style="color:var(--g3);font-size:11px">FY2025</td>
+          <td class="r"><div class="ib"><span>36,9%</span><div class="ibt"><div class="ibf" style="width:57%;background:#1e40af"></div></div></div></td>
+          <td class="r"><div class="ib"><span>16,0%</span><div class="ibt"><div class="ibf" style="width:59%;background:#1e40af"></div></div></div></td>
+          <td class="r">25,7%</td><td class="r">12,7%</td>
+        </tr>
+        <tr>
+          <td><div class="cn">Infosys</div><div class="cl">Ấn Độ · NSE</div></td>
+          <td class="r" style="color:var(--g3);font-size:11px">FY2025</td>
+          <td class="r"><div class="ib"><span>33,1%</span><div class="ibt"><div class="ibf" style="width:51%;background:#c8c5be"></div></div></div></td>
+          <td class="r"><div class="ib"><span>17,1%</span><div class="ibt"><div class="ibf" style="width:63%;background:#c8c5be"></div></div></div></td>
+          <td class="r">32,8%</td><td class="r">17,5%</td>
+        </tr>
+        <tr>
+          <td><div class="cn">Accenture</div><div class="cl">Mỹ · NYSE</div></td>
+          <td class="r" style="color:var(--g3);font-size:11px">FY2025</td>
+          <td class="r"><div class="ib"><span>33,8%</span><div class="ibt"><div class="ibf" style="width:52%;background:#c8c5be"></div></div></div></td>
+          <td class="r"><div class="ib"><span>12,1%</span><div class="ibt"><div class="ibf" style="width:45%;background:#c8c5be"></div></div></div></td>
+          <td class="r">30,1%</td><td class="r">14,8%</td>
+        </tr>
+        <tr>
+          <td><div class="cn">Wipro</div><div class="cl">Ấn Độ · NSE</div></td>
+          <td class="r" style="color:var(--g3);font-size:11px">FY2025</td>
+          <td class="r"><div class="ib"><span>28,4%</span><div class="ibt"><div class="ibf" style="width:44%;background:#c8c5be"></div></div></div></td>
+          <td class="r"><div class="ib"><span>13,6%</span><div class="ibt"><div class="ibf" style="width:50%;background:#c8c5be"></div></div></div></td>
+          <td class="r">16,4%</td><td class="r">10,2%</td>
+        </tr>
+        <tr>
+          <td><div class="cn">NTT Data</div><div class="cl">Nhật Bản · TSE</div></td>
+          <td class="r" style="color:var(--g3);font-size:11px">FY2025</td>
+          <td class="r"><div class="ib"><span>23,1%</span><div class="ibt"><div class="ibf" style="width:36%;background:#c8c5be"></div></div></div></td>
+          <td class="r"><div class="ib"><span>6,2%</span><div class="ibt"><div class="ibf" style="width:23%;background:#c8c5be"></div></div></div></td>
+          <td class="r">12,4%</td><td class="r">4,8%</td>
+        </tr>
+        <tr>
+          <td><div class="cn">CMC Corp</div><div class="cl">Việt Nam · HNX</div></td>
+          <td class="r" style="color:var(--g3);font-size:11px">2025 ước tính</td>
+          <td class="r"><div class="ib"><span>~20%</span><div class="ibt"><div class="ibf" style="width:31%;background:#c8c5be"></div></div></div></td>
+          <td class="r"><div class="ib"><span>~5,5%</span><div class="ibt"><div class="ibf" style="width:20%;background:#c8c5be"></div></div></div></td>
+          <td class="r">~13%</td><td class="r">~5,5%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">biểu đồ so sánh</div>
+  <div class="legend">
+    <div class="l-item"><div class="l-dot" style="background:#1e40af"></div>FPT (FY2025)</div>
+    <div class="l-item"><div class="l-dot" style="background:#d1d0cc"></div>Peers (FY2025)</div>
+  </div>
+  <div class="dual">
+    <div>
+      <div class="dual-label">Biên lợi nhuận ròng — FY2025 (%)</div>
+      <div class="dual-canvas"><canvas id="pN" role="img" aria-label="Biên ròng FY2025: FPT 16,0 Infosys 17,1 Wipro 13,6 Accenture 12,1 NTT Data 6,2 CMC 5,5">FPT 16,0 Infosys 17,1 Wipro 13,6 Accenture 12,1 NTT Data 6,2 CMC 5,5</canvas></div>
+    </div>
+    <div>
+      <div class="dual-label">ROE — FY2025 (%)</div>
+      <div class="dual-canvas"><canvas id="pR" role="img" aria-label="ROE FY2025: Infosys 32,8 Accenture 30,1 FPT 25,7 Wipro 16,4 NTT Data 12,4 CMC 13,0">Infosys 32,8 Accenture 30,1 FPT 25,7 Wipro 16,4 NTT Data 12,4 CMC 13,0</canvas></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">kết luận</div>
+  <div class="concl">
+    FPT 2025 có <b>biên ròng (16%) ngang Infosys, vượt Wipro và Accenture</b> — đáng chú ý khi FPT phục vụ thị trường giá thấp hơn nhiều. ROE (25,7%) chỉ sau Infosys và Accenture, cao hơn toàn bộ nhóm còn lại. Rủi ro ngắn hạn ở áp lực chi phí nhân sự offshore, nhưng <b>vị thế sinh lời trong ngành là vững chắc</b>.
+  </div>
+</div>
+
+<div class="footer">
+  <span>Peers cùng năm 2025: Infosys FY25 · Wipro FY25 · Accenture FY25 · NTT Data FY25 · CMC ước tính</span>
+  <span>Chỉ mang tính tham khảo — không phải khuyến nghị đầu tư</span>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const F='Bricolage Grotesque';
+const tip={backgroundColor:'#16130f',titleColor:'#f5f4f1',bodyColor:'#ccc9c1',padding:8,cornerRadius:3,titleFont:{family:F,size:11},bodyFont:{family:F,size:11}};
+
+new Chart(document.getElementById('mc'),{
+  type:'bar',
+  data:{
+    labels:['Biên gộp','Biên ròng','ROA','ROE'],
+    datasets:[
+      {label:'2024',data:[37.7,15.0,13.1,26.4],backgroundColor:'rgba(204,201,193,0.45)',borderColor:'#ccc9c1',borderWidth:1.5,borderRadius:3},
+      {label:'2025',data:[36.9,16.0,12.7,25.7],backgroundColor:'rgba(30,64,175,0.16)',borderColor:'#1e40af',borderWidth:1.5,borderRadius:3},
+      {label:'Q1/2026',data:[34.0,19.9,14.4,25.5],backgroundColor:'rgba(15,118,110,0.18)',borderColor:'#0f766e',borderWidth:1.5,borderRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>' '+c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'}}},
+    scales:{
+      x:{ticks:{color:'#8c8980',font:{family:F,size:10},maxRotation:0},grid:{color:'rgba(0,0,0,0.04)'},border:{color:'rgba(0,0,0,0.07)'}},
+      y:{ticks:{color:'#8c8980',font:{family:F,size:10},callback:v=>v+'%'},grid:{color:'rgba(0,0,0,0.04)'},border:{color:'rgba(0,0,0,0.07)'},min:0,max:42}
+    }
+  }
+});
+
+const peers=['FPT','Infosys','Accenture','Wipro','NTT Data','CMC'];
+const pc=peers.map(p=>p==='FPT'?'#1e40af':'rgba(204,201,193,0.6)');
+const pb=peers.map(p=>p==='FPT'?'#1e40af':'#ccc9c1');
+const so={
+  indexAxis:'y',responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>' '+c.parsed.x.toFixed(1)+'%'}}},
+  scales:{
+    y:{ticks:{color:'#4b4844',font:{family:F,size:11}},grid:{display:false},border:{display:false}},
+    x:{ticks:{color:'#8c8980',font:{family:F,size:10},callback:v=>v+'%'},grid:{color:'rgba(0,0,0,0.04)'},border:{color:'rgba(0,0,0,0.06)'},min:0}
+  }
+};
+new Chart(document.getElementById('pN'),{type:'bar',
+  data:{labels:peers,datasets:[{data:[16.0,17.1,12.1,13.6,6.2,5.5],backgroundColor:pc,borderColor:pb,borderWidth:1.5,borderRadius:3}]},
+  options:{...so,scales:{...so.scales,x:{...so.scales.x,max:22}}}
+});
+new Chart(document.getElementById('pR'),{type:'bar',
+  data:{labels:peers,datasets:[{data:[25.7,32.8,30.1,16.4,13.0,12.4],backgroundColor:pc,borderColor:pb,borderWidth:1.5,borderRadius:3}]},
+  options:{...so,scales:{...so.scales,x:{...so.scales.x,max:38}}}
+});
+</script>
+</body>
+</html>
